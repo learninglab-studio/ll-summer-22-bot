@@ -1,0 +1,92 @@
+const { App } = require('@slack/bolt');
+require('dotenv').config();
+const yargs = require('yargs')
+var Airtable = require('airtable');
+
+
+
+const app = new App({
+  token: process.env.SLACK_BOT_TOKEN,
+  signingSecret: process.env.SLACK_SIGNING_SECRET,
+  socketMode: true,
+  appToken: process.env.SLACK_APP_TOKEN,
+  // Socket Mode doesn't listen on a port, but in case you want your app to respond to OAuth,
+  // you still need to listen on some port!
+  port: process.env.PORT || 3000
+});
+
+// Listens to incoming messages that contain "hello"
+app.message('hello', async ({ message, say }) => {
+  // say() sends a message to the channel where the event was triggered
+  await say(`Hey there <@${message.user}>!`);
+
+});
+
+app.message(/.*/, async ({ message }) => {
+    try {
+        console.log(JSON.stringify(message, null, 4))
+        await sendToAirtable({
+            record: {
+                "SlackTs": message.ts,
+                "SlackJson": JSON.stringify(message, null, 4),
+                "SlackUserId": message.user,
+                "Text": message.text,
+                "SlackChannel": message.channel
+            },
+            table: "Summer22Slacks"
+        })
+    } catch (error) {
+        console.log(error)
+    }
+});
+
+
+app.event(/.*/, async ({ event, client, logger }) => {
+    try {
+      // Call chat.postMessage with the built-in client
+    //   const result = await client.chat.postMessage({
+    //     channel: welcomeChannelId,
+    //     text: `Welcome to the team, <@${event.user.id}>! 🎉 You can introduce yourself in this channel.`
+    //   });
+      logger.info(event);
+      await sendToAirtable({
+        record: {
+            "SlackTs": event.event_ts,
+            "SlackJson": JSON.stringify(event, null, 4),
+            // "SlackUserId": message.user,
+            // "Text": message.text
+        },
+        table: "Summer22Events"
+    })
+    }
+    catch (error) {
+      logger.error(error);
+    }
+  });
+
+
+
+app.command('/s22', async ({ command, ack, respond }) => {
+    // Acknowledge command request
+    await ack();
+    let result = yargs(command.text).parse()
+    await respond(`here you go:\n${JSON.stringify(result, null, 4)}`);
+});
+
+
+(async () => {
+  // Start your app
+  console.log(`connecting with `)
+  
+  await app.start();
+
+  console.log('⚡️ Bolt app is running!');
+})();
+
+
+const sendToAirtable = async ({record, table}) => {
+    var base = new Airtable({apiKey: process.env.AIRTABLE_API_KEY}).base(process.env.AIRTABLE_SUMMER_BASE);
+    const result = await base(table)
+        .create(record)
+        .catch(err => {console.log(err)})
+}

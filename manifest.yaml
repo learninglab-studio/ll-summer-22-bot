@@ -1,0 +1,90 @@
+display_information:
+  name: ll-summer-22-bot
+  description: ll summer experiments
+  background_color: "#212224"
+features:
+  app_home:
+    home_tab_enabled: true
+    messages_tab_enabled: false
+    messages_tab_read_only_enabled: false
+  bot_user:
+    display_name: ll-summer-22-bot
+    always_online: false
+  shortcuts:
+    - name: save this somewhere
+      type: message
+      callback_id: save_this_somewhere
+      description: saves this for the summer anyway
+  slash_commands:
+    - command: /s22
+      description: launches summer 22 test
+      usage_hint: "[args]"
+      should_escape: false
+oauth_config:
+  scopes:
+    user:
+      - files:read
+      - files:write
+      - channels:history
+      - channels:read
+      - chat:write
+      - emoji:read
+      - links:read
+      - links:write
+      - pins:read
+      - pins:write
+      - reactions:read
+      - reactions:write
+      - search:read
+      - reminders:write
+      - reminders:read
+    bot:
+      - channels:read
+      - chat:write
+      - files:read
+      - files:write
+      - im:history
+      - im:write
+      - im:read
+      - pins:read
+      - pins:write
+      - reactions:read
+      - reactions:write
+      - reminders:read
+      - reminders:write
+      - channels:history
+      - commands
+      - links:read
+      - groups:history
+      - mpim:history
+settings:
+  event_subscriptions:
+    user_events:
+      - file_change
+      - file_created
+      - file_deleted
+      - file_public
+      - file_shared
+      - file_unshared
+    bot_events:
+      - app_home_opened
+      - file_change
+      - file_created
+      - file_deleted
+      - file_public
+      - file_shared
+      - file_unshared
+      - link_shared
+      - message.channels
+      - message.groups
+      - message.im
+      - message.mpim
+      - pin_added
+      - pin_removed
+      - reaction_added
+      - reaction_removed
+  interactivity:
+    is_enabled: true
+  org_deploy_enabled: false
+  socket_mode_enabled: true
+  token_rotation_enabled: false

@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "@slack/bolt": "^3.11.1",
+    "airtable": "^0.11.4",
+    "dotenv": "^16.0.1",
+    "yargs": "^17.5.1"
+  },
+  "name": "ll-summer-22-bot",
+  "description": "summer 22 bot",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/learninglab-studio/ll-summer-22-bot.git"
+  },
+  "author": "LL",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/learninglab-studio/ll-summer-22-bot/issues"
+  },
+  "homepage": "https://github.com/learninglab-studio/ll-summer-22-bot#readme"
+}
