@@ -3,7 +3,7 @@ require('dotenv').config();
 const yargs = require('yargs')
 var Airtable = require('airtable');
 const s22Slash = require('./src/slashes/s-22-slash')
-const mw = require('.src/utilities/slack-middleware')
+const mw = require('./src/utilities/slack-middleware')
 
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
