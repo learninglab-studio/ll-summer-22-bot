@@ -2,7 +2,7 @@ const { App } = require('@slack/bolt');
 require('dotenv').config();
 const yargs = require('yargs')
 var Airtable = require('airtable');
-
+const s22Slash = require('./src/slashes/s-22-slash')
 
 
 const app = new App({
@@ -40,7 +40,6 @@ app.message(/.*/, async ({ message }) => {
     }
 });
 
-
 app.event(/.*/, async ({ event, client, logger }) => {
     try {
       // Call chat.postMessage with the built-in client
@@ -64,15 +63,7 @@ app.event(/.*/, async ({ event, client, logger }) => {
     }
   });
 
-
-
-app.command('/s22', async ({ command, ack, respond }) => {
-    // Acknowledge command request
-    await ack();
-    let result = yargs(command.text).parse()
-    await respond(`here you go:\n${JSON.stringify(result, null, 4)}`);
-});
-
+app.command('/s22', s22Slash);
 
 (async () => {
   // Start your app
