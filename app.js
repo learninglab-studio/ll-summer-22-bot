@@ -22,46 +22,46 @@ app.message('hello', async ({ message, say }) => {
 
 });
 
-// app.message(/.*/, async ({ message }) => {
-//     try {
-//         console.log(JSON.stringify(message, null, 4))
-//         await sendToAirtable({
-//             record: {
-//                 "SlackTs": message.ts,
-//                 "SlackJson": JSON.stringify(message, null, 4),
-//                 "SlackUserId": message.user,
-//                 "Text": message.text,
-//                 "SlackChannel": message.channel
-//             },
-//             table: "Summer22Slacks"
-//         })
-//     } catch (error) {
-//         console.log(error)
-//     }
-// });
+app.message(/.*/, async ({ message }) => {
+    try {
+        console.log(JSON.stringify(message, null, 4))
+        await sendToAirtable({
+            record: {
+                "SlackTs": message.ts,
+                "SlackJson": JSON.stringify(message, null, 4),
+                "SlackUserId": message.user,
+                "Text": message.text,
+                "SlackChannel": message.channel
+            },
+            table: "Summer22Slacks"
+        })
+    } catch (error) {
+        console.log(error)
+    }
+});
 
-// app.event(/.*/, async ({ event, client, logger }) => {
-//     try {
-//       // Call chat.postMessage with the built-in client
-//     //   const result = await client.chat.postMessage({
-//     //     channel: welcomeChannelId,
-//     //     text: `Welcome to the team, <@${event.user.id}>! 🎉 You can introduce yourself in this channel.`
-//     //   });
-//       logger.info(event);
-//       await sendToAirtable({
-//         record: {
-//             "SlackTs": event.event_ts,
-//             "SlackJson": JSON.stringify(event, null, 4),
-//             // "SlackUserId": message.user,
-//             // "Text": message.text
-//         },
-//         table: "Summer22Events"
-//     })
-//     }
-//     catch (error) {
-//       logger.error(error);
-//     }
-//   });
+app.event(/.*/, async ({ event, client, logger }) => {
+    try {
+      // Call chat.postMessage with the built-in client
+    //   const result = await client.chat.postMessage({
+    //     channel: welcomeChannelId,
+    //     text: `Welcome to the team, <@${event.user.id}>! 🎉 You can introduce yourself in this channel.`
+    //   });
+      logger.info(event);
+      await sendToAirtable({
+        record: {
+            "SlackTs": event.event_ts,
+            "SlackJson": JSON.stringify(event, null, 4),
+            // "SlackUserId": message.user,
+            // "Text": message.text
+        },
+        table: "Summer22Events"
+    })
+    }
+    catch (error) {
+      logger.error(error);
+    }
+  });
 
 app.command('/s22', s22Slash);
 
