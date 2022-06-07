@@ -3,7 +3,7 @@ require('dotenv').config();
 const yargs = require('yargs')
 var Airtable = require('airtable');
 const s22Slash = require('./src/slashes/s-22-slash')
-
+const mw = require('.src/utilities/slack-middleware')
 
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
@@ -16,7 +16,7 @@ const app = new App({
 });
 
 // Listens to incoming messages that contain "hello"
-app.message('hello', async ({ message, say }) => {
+app.message('hello', mw.noBot, async ({ message, say }) => {
   // say() sends a message to the channel where the event was triggered
   await say(`Hey there <@${message.user}>!`);
 
