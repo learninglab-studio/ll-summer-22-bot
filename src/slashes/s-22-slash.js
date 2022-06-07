@@ -1,3 +1,4 @@
+const yargs = require('yargs')
 
 
 const s22Slash = async ({ command, ack, respond }) => {
