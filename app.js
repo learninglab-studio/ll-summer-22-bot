@@ -3,6 +3,7 @@ require('dotenv').config();
 const yargs = require('yargs')
 var Airtable = require('airtable');
 const s22Slash = require('./src/slashes/s-22-slash')
+const ddSlash = require('./src/slashes/dd-slash')
 const mw = require('./src/utilities/slack-middleware')
 
 const app = new App({
@@ -19,7 +20,6 @@ const app = new App({
 app.message('hello', mw.noBot, async ({ message, say }) => {
   // say() sends a message to the channel where the event was triggered
   await say(`Hey there <@${message.user}>!`);
-
 });
 
 app.message(/.*/, async ({ message }) => {
@@ -64,6 +64,7 @@ app.event(/.*/, async ({ event, client, logger }) => {
   });
 
 app.command('/s22', s22Slash);
+app.command('/dd', ddSlash);
 
 (async () => {
   // Start your app
