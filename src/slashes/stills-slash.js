@@ -42,7 +42,7 @@ const makeBlocks = () => {
                             "emoji": true
                         },
                         "value": "clicked_PGM2",
-                        "action_id": "stills-request-0"
+                        "action_id": "stills-request-1"
                     }
                 ]
             },
