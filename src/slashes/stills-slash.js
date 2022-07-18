@@ -6,7 +6,7 @@ const stillsSlash = async ({ command, ack, respond }) => {
     await ack();
     console.log(`*********command*************`)
     console.log(JSON.stringify(command, null, 4))
-    let result = yargs().parse("test test")
+    let result = yargs().parse("test test ")
     const payload = {
         blocks: [
             {
@@ -17,7 +17,7 @@ const stillsSlash = async ({ command, ack, respond }) => {
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": `for yargs:\n${JSON.stringify(yargs, null, 4)}`
+                    "text": `for yargs:\n${JSON.stringify(result, null, 4)}`
                 }
             }
         ]
@@ -29,7 +29,7 @@ const stillsSlash = async ({ command, ack, respond }) => {
             "SlackJSON": JSON.stringify(command, null, 4),
             "Timecode": "will compute this"
             // "SlackUserId": message.user,
-            // "Text": message.text
+            "Name": command.text
         },
         table: "StillsRequests"
     })
