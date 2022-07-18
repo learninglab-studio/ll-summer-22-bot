@@ -4,6 +4,8 @@ const { sendToAirtable } = require('../utilities/airtable-tools')
 const stillsSlash = async ({ command, ack, respond }) => {
     // Acknowledge command request
     await ack();
+    console.log(`*********command*************`)
+    console.log(JSON.stringify(command, null, 4))
     let result = yargs(command.text).parse()
     const payload = {
         blocks: [
