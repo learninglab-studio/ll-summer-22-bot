@@ -7,11 +7,12 @@ const stillsSlash = async ({ command, ack, respond }) => {
     console.log(`*********command*************`)
     console.log(JSON.stringify(command, null, 4))
     let result = yargs(command.text).parse()
+    let buttons = await makeButtons(result._)
     const payload = {
         blocks: [
             {
                 "type": "actions",
-                "elements": makeButtons(result._)
+                "elements": buttons
             },
             {
                 "type": "section",
@@ -22,7 +23,7 @@ const stillsSlash = async ({ command, ack, respond }) => {
             }
         ]
     }
-    await respond({
+    await respond(
         {
             "blocks": [
                 {
@@ -52,7 +53,7 @@ const stillsSlash = async ({ command, ack, respond }) => {
                 }
             ]
         }
-    });
+    );
     sendToAirtable({
         record: {
             "SlackTs": "command.event_ts or similar",
@@ -65,7 +66,7 @@ const stillsSlash = async ({ command, ack, respond }) => {
     })
 }
 
-const makeButtons = (arr) => {
+const makeButtons = async (arr) => {
     const elements = []
     for (let i = 0; i < arr.length; i++) {
         const element = arr[i];
