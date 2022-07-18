@@ -5,7 +5,7 @@ const stillsSlash = async ({ command, ack, respond }) => {
     // Acknowledge command request
     await ack();
     let result = yargs(command.text).parse()
-    await respond({
+    const payload = {
         blocks: [
             {
                 "type": "actions",
@@ -19,7 +19,8 @@ const stillsSlash = async ({ command, ack, respond }) => {
                 }
             }
         ]
-    });
+    }
+    await respond(JSON.stringify(payload, null, 4));
     sendToAirtable({
         record: {
             "SlackTs": "command.event_ts or similar",
