@@ -47,15 +47,15 @@ app.action(/.*/, async ({ ack, body, client, say }) => {
   console.log(JSON.stringify(body, null, 4))
   await say(`got that ${body.actions[0].action_id}`)
   if (body.actions[0].action_id.match(/^stills-request-/)) {
-    const localDateString = new Date(body.actions[0].action_ts * 1000).toLocaleString("en-us", { timeZone: "America/New_York"})
-    const action_ts = new Date(localDateString)
+    const action_ts = new Date(body.actions[0].action_ts * 1000)
+    const localTime = new Date(action_ts.toLocaleString("en-us", { timeZone: "America/New_York"}))
     await sendToAirtable({
       record: {
           "Name": "Test",
           SlackJSON: JSON.stringify(body, null, 4),
           Source: body.actions[0].action_id.replace("stills-request-", ""),
           SlackTs: body.actions[0].action_ts,
-          Timecode: `${action_ts.getHours().toString().padStart(2, "0")}:${action_ts.getMinutes().toString().padStart(2, "0")}:${action_ts.getSeconds().toString().padStart(2, "0")}.${action_ts.getMilliseconds().toString().padStart(3, "0")}`,
+          Timecode: `${localTime.getHours().toString().padStart(2, "0")}:${action_ts.getMinutes().toString().padStart(2, "0")}:${action_ts.getSeconds().toString().padStart(2, "0")}.${action_ts.getMilliseconds().toString().padStart(3, "0")}`,
           TimestampDate: (new Date(body.actions[0].action_ts * 1000)).toUTCString(),
           Type: `still`
           // dateObj = ;
