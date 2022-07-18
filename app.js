@@ -66,7 +66,7 @@ app.event(/.*/, async ({ event, client, logger }) => {
 
 app.command('/s22', s22Slash);
 app.command('/dd', ddSlash);
-app.command('/stills' stillsSlash);
+app.command('/stills', stillsSlash);
 
 (async () => {
   // Start your app
