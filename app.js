@@ -4,6 +4,7 @@ const yargs = require('yargs')
 var Airtable = require('airtable');
 const s22Slash = require('./src/slashes/s-22-slash')
 const ddSlash = require('./src/slashes/dd-slash')
+const stillsSlash = require('./src/slashes/stills-slash')
 const mw = require('./src/utilities/slack-middleware')
 
 const app = new App({
@@ -65,6 +66,7 @@ app.event(/.*/, async ({ event, client, logger }) => {
 
 app.command('/s22', s22Slash);
 app.command('/dd', ddSlash);
+app.command('/stills' stillsSlash);
 
 (async () => {
   // Start your app
