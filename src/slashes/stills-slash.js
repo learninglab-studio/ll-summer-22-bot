@@ -11,7 +11,7 @@ const stillsSlash = async ({ command, ack, respond }) => {
         blocks: [
             {
                 "type": "actions",
-                "elements": makeElements(result._)
+                "elements": makeButtons(result._)
             },
             {
                 "type": "section",
