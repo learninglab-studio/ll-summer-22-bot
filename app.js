@@ -54,7 +54,7 @@ app.action(/.*/, async ({ ack, body, client, say }) => {
           SlackJSON: JSON.stringify(body, null, 4),
           Source: body.actions[0].action_id.replace("stills-request-", ""),
           SlackTs: body.actions[0].action_ts,
-          Timecode: `${action_ts.getHours().padStart(2, "0")}:${action_ts.getMinutes().padStart(2, "0")}:${action_ts.getSeconds().padStart(2, "0")}.${action_ts.getMilliseconds().toString().padStart(3, "0")}`,
+          Timecode: `${action_ts.getHours().toString().padStart(2, "0")}:${action_ts.getMinutes().toString().padStart(2, "0")}:${action_ts.getSeconds().toString().padStart(2, "0")}.${action_ts.getMilliseconds().toString().padStart(3, "0")}`,
           TimestampDate: (new Date(body.actions[0].action_ts * 1000)).toUTCString(),
           Type: `still`
           // dateObj = ;
