@@ -45,7 +45,7 @@ app.action(/.*/, async ({ ack, body, client, say }) => {
   await ack();
   console.log(`********ACTION**********`)
   console.log(JSON.stringify(body, null, 4))
-  await say(`got that ${JSON.stringify(body, null, 4)}`)
+  // await say(`got that ${JSON.stringify(body, null, 4)}`)
   
   // Update the message to reflect the action
 });
