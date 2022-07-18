@@ -36,7 +36,7 @@ const stillsSlash = async ({ command, ack, respond }) => {
 }
 
 const makeElements = (text) => {
-    const elements = []
+    const elements = ["pgm1", "pgm2"]
     const words = text.split("")
     for (let i = 0; i < elements.length; i++) {
         const element = elements[i];
