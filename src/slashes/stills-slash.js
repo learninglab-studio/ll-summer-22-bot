@@ -27,7 +27,7 @@ const stillsSlash = async ({ command, ack, respond }) => {
         record: {
             "SlackTs": "command.event_ts or similar",
             "SlackJSON": JSON.stringify(command, null, 4),
-            "Timecode": "will compute this"
+            "Timecode": "will compute this",
             // "SlackUserId": message.user,
             "Name": command.text
         },
