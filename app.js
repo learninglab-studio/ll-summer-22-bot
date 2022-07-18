@@ -51,7 +51,12 @@ app.action(/.*/, async ({ ack, body, client, say }) => {
       record: {
           "Name": "Test",
           SlackJSON: JSON.stringify(body, null, 4),
-          Source: body.actions[0].action_id.replace("stills-request-", "")
+          Source: body.actions[0].action_id.replace("stills-request-", ""),
+          SlackTs: body.actions[0].action_ts,
+          Timecode: (new Date(body.actions[0].action_ts * 1000)).toUTCString()
+          // dateObj = ;
+          // utcString = dateObj.toUTCString();
+          // time = utcString.slice(-11, -4);
       },
       table: "StillsRequests"
     })
