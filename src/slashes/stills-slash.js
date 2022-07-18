@@ -19,18 +19,7 @@ const stillsSlash = async ({ command, ack, respond }) => {
             },
             {
                 "type": "actions",
-                "elements": [
-                    {
-                        "type": "button",
-                        "text": {
-                            "type": "plain_text",
-                            "text": "Click Me",
-                            "emoji": true
-                        },
-                        "value": "click_me_123",
-                        "action_id": "actionId-0"
-                    }
-                ]
+                "elements": buttons
             }
         ]
     }
