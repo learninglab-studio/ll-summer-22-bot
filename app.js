@@ -46,7 +46,7 @@ app.action(/.*/, async ({ ack, body, client, say }) => {
   console.log(`********ACTION**********`)
   console.log(JSON.stringify(body, null, 4))
   await say(`got that ${body.actions[0].action_id}`)
-  if (body.actions[0].action_id.test(/^stills-request-/)) {
+  if (body.actions[0].action_id.match(/^stills-request-/)) {
     await sendToAirtable({
       record: {
           "Name": "Test",
