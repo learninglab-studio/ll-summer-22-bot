@@ -41,6 +41,14 @@ app.message(/.*/, async ({ message }) => {
     }
 });
 
+app.action(/.*/, async ({ ack, body, client }) => {
+  console.log(`********ACTION**********`)
+  console.log(JSON.stringify(body, null, 4))
+  await ack();
+  // Update the message to reflect the action
+});
+
+
 app.event(/.*/, async ({ event, client, logger }) => {
     try {
       // Call chat.postMessage with the built-in client
