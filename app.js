@@ -41,7 +41,7 @@ app.message(/.*/, async ({ message }) => {
     }
 });
 
-app.action(/.*/, async ({ ack, body, client }) => {
+app.action(/.*/, async ({ ack, body, client, say }) => {
   await ack();
   console.log(`********ACTION**********`)
   console.log(JSON.stringify(body, null, 4))
