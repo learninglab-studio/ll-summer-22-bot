@@ -22,7 +22,7 @@ const stillsSlash = async ({ command, ack, respond }) => {
             }
         ]
     }
-    await respond(payload);
+    await respond("test");
     sendToAirtable({
         record: {
             "SlackTs": "command.event_ts or similar",
