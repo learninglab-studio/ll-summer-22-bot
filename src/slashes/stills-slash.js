@@ -22,7 +22,42 @@ const stillsSlash = async ({ command, ack, respond }) => {
             }
         ]
     }
-    await respond(payload);
+    await respond({
+        "blocks": [
+            {
+                "type": "actions",
+                "elements": [
+                    {
+                        "type": "button",
+                        "text": {
+                            "type": "plain_text",
+                            "text": "test1",
+                            "emoji": true
+                        },
+                        "value": "clicked_test1",
+                        "action_id": "stills-request-test1"
+                    },
+                    {
+                        "type": "button",
+                        "text": {
+                            "type": "plain_text",
+                            "text": "test2",
+                            "emoji": true
+                        },
+                        "value": "clicked_test2",
+                        "action_id": "stills-request-test2"
+                    }
+                ]
+            },
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "for yargs:\n{\n    \"_\": [\n        \"test1\",\n        \"test2\"\n    ],\n    \"$0\": \"app.js\"\n}"
+                }
+            }
+        ]
+     });
     sendToAirtable({
         record: {
             "SlackTs": "command.event_ts or similar",
