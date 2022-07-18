@@ -47,7 +47,8 @@ app.action(/.*/, async ({ ack, body, client, say }) => {
   console.log(JSON.stringify(body, null, 4))
   await say(`got that ${body.actions[0].action_id}`)
   if (body.actions[0].action_id.match(/^stills-request-/)) {
-    const action_ts = new Date(body.actions[0].action_ts * 1000)
+    const localDateString = new Date(body.actions[0].action_ts * 1000).toLocaleString("en-us", { timeZone: "America/New_York"})
+    const action_ts = new Date(localDateString)
     await sendToAirtable({
       record: {
           "Name": "Test",
