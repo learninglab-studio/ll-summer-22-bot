@@ -6,7 +6,7 @@ const stillsSlash = async ({ command, ack, respond }) => {
     await ack();
     console.log(`*********command*************`)
     console.log(JSON.stringify(command, null, 4))
-    let result = yargs(command.text).parse()
+    let result = yargs().parse(command.text)
     const payload = {
         blocks: [
             {
