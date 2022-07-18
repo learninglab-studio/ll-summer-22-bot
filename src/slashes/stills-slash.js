@@ -6,12 +6,12 @@ const stillsSlash = async ({ command, ack, respond }) => {
     await ack();
     console.log(`*********command*************`)
     console.log(JSON.stringify(command, null, 4))
-    let result = yargs().parse("test test ")
+    let result = yargs(command.text).parse()
     const payload = {
         blocks: [
             {
                 "type": "actions",
-                "elements": makeElements(command.text)
+                "elements": makeElements(result._)
             },
             {
                 "type": "section",
@@ -35,11 +35,10 @@ const stillsSlash = async ({ command, ack, respond }) => {
     })
 }
 
-const makeElements = (text) => {
-    const elements = ["pgm1", "pgm2"]
-    const words = text.split("")
-    for (let i = 0; i < elements.length; i++) {
-        const element = elements[i];
+const makeButtons = (arr) => {
+    const elements = []
+    for (let i = 0; i < arr.length; i++) {
+        const element = arr[i];
         elements.push({
             "type": "button",
                         "text": {
