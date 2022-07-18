@@ -6,7 +6,7 @@ const stillsSlash = async ({ command, ack, respond }) => {
     await ack();
     console.log(`*********command*************`)
     console.log(JSON.stringify(command, null, 4))
-    let result = yargs(command.text).parse()
+    let result = yargs(command.text).argv
     const payload = {
         blocks: [
             {
@@ -22,7 +22,7 @@ const stillsSlash = async ({ command, ack, respond }) => {
             }
         ]
     }
-    await respond(JSON.stringify(payload, null, 4));
+    await respond(payload);
     sendToAirtable({
         record: {
             "SlackTs": "command.event_ts or similar",
