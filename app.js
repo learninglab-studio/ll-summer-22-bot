@@ -47,13 +47,15 @@ app.action(/.*/, async ({ ack, body, client, say }) => {
   console.log(JSON.stringify(body, null, 4))
   await say(`got that ${body.actions[0].action_id}`)
   if (body.actions[0].action_id.match(/^stills-request-/)) {
+    const action_ts = new Date(body.actions[0].action_ts * 1000)
     await sendToAirtable({
       record: {
           "Name": "Test",
           SlackJSON: JSON.stringify(body, null, 4),
           Source: body.actions[0].action_id.replace("stills-request-", ""),
           SlackTs: body.actions[0].action_ts,
-          Timecode: (new Date(body.actions[0].action_ts * 1000)).toUTCString()
+          Timecode: `${action_ts.getHours()}:${action_ts.getMinutes}:${action_ts.getSeconds()}.${action_ts.getMilliseconds()}`,
+          TimestampDate: (new Date(body.actions[0].action_ts * 1000)).toUTCString(),
           // dateObj = ;
           // utcString = dateObj.toUTCString();
           // time = utcString.slice(-11, -4);
