@@ -5,7 +5,21 @@ const stillsSlash = async ({ command, ack, respond }) => {
     // Acknowledge command request
     await ack();
     let result = yargs(command.text).parse()
-    await respond(makeBlocks(command));
+    await respond({
+        blocks: [
+            {
+                "type": "actions",
+                "elements": makeElements(command.text)
+            },
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": `for yargs:\n${JSON.stringify(yargs, null, 4)}`
+                }
+            }
+        ]
+    });
     sendToAirtable({
         record: {
             "SlackTs": "command.event_ts or similar",
@@ -18,36 +32,27 @@ const stillsSlash = async ({ command, ack, respond }) => {
     })
 }
 
-const makeBlocks = () => {
-    return {
-        blocks: [
-            {
-                "type": "actions",
-                "elements": [
-                    {
-                        "type": "button",
+const makeElements = (text) => {
+    const elements = []
+    const words = text.split("")
+    for (let i = 0; i < elements.length; i++) {
+        const element = elements[i];
+        elements.push({
+            "type": "button",
                         "text": {
                             "type": "plain_text",
-                            "text": "PGM1",
+                            "text": element,
                             "emoji": true
                         },
-                        "value": "clicked_PGM1",
-                        "action_id": "stills-request-pgm1"
-                    },
-                    {
-                        "type": "button",
-                        "text": {
-                            "type": "plain_text",
-                            "text": "PGM2",
-                            "emoji": true
-                        },
-                        "value": "clicked_PGM2",
-                        "action_id": "stills-request-pgm2"
-                    }
-                ]
-            },
-        ]
+                        "value": `clicked_${element}`,
+                        "action_id": `stills-request-${element}`
+        })
     }
+    return elements
+}
+
+const makeBlocks = () => {
+    return 
 }
 
 module.exports = stillsSlash
