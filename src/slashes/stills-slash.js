@@ -18,7 +18,7 @@ const stillsSlash = async ({ command, ack, respond }) => {
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": `for yargs:\n${JSON.stringify(result, null, 4)}`
+                    "text": `testing`
                 }
             }
         ]
@@ -30,7 +30,8 @@ const stillsSlash = async ({ command, ack, respond }) => {
             "SlackJSON": JSON.stringify(command, null, 4),
             "Timecode": "will compute this",
             // "SlackUserId": message.user,
-            "Name": command.text
+            "Name": command.text,
+            "Type": "session"
         },
         table: "StillsRequests"
     })
