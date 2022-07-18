@@ -9,7 +9,8 @@ const stillsSlash = async ({ command, ack, respond }) => {
     sendToAirtable({
         record: {
             "SlackTs": "command.event_ts or similar",
-            "SlackJson": JSON.stringify(command, null, 4),
+            "SlackJSON": JSON.stringify(command, null, 4),
+            "Timecode": "will compute this"
             // "SlackUserId": message.user,
             // "Text": message.text
         },
