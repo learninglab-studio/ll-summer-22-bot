@@ -34,7 +34,7 @@ const stillsSlash = async ({ command, ack, respond }) => {
             }
         ]
     }
-    await respond(JSON.stringify(payload, null, 4));
+    await respond(payload);
     sendToAirtable({
         record: {
             "SlackTs": "command.event_ts or similar",
@@ -54,11 +54,11 @@ const makeButtons = async (arr) => {
         const element = arr[i];
         elements.push({
             "type": "button",
-                        "text": {
-                            "type": "plain_text",
-                            "text": element,
-                            "emoji": true
-                        },
+            "text": {
+                "type": "plain_text",
+                "text": element,
+                "emoji": true
+            },
             "value": `clicked_${element}`,
             "action_id": `stills-request-${element}`
         })
