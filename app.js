@@ -51,7 +51,7 @@ app.action(/.*/, async ({ ack, body, client, say }) => {
       record: {
           "Name": "Test",
           SlackJSON: JSON.stringify(body, null, 4),
-          Source: body.actions[0].action_id
+          Source: body.actions[0].action_id.replace("stills-request-", "")
       },
       table: "StillsRequests"
     })
